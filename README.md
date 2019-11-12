@@ -12,7 +12,6 @@ Functional point-free utilities for fetch
 <a href="https://bundlephobia.com/result?p=pointless-fetch@latest" title="minzipped size"><img src="https://img.shields.io/bundlephobia/minzip/pointless-fetch@latest?style=flat-square" alt="size"></a>
 <a href="https://coveralls.io/github/raiondesu-experiments/pointless-fetch" title="Code coverage"><img src="https://img.shields.io/coveralls/github/raiondesu-experiments/pointless-fetch?style=flat-square" alt="coveralls"></a>
 <a href="https://codeclimate.com/github/raiondesu-experiments/pointless-fetch/maintainability" title="Code quality"><img src="https://img.shields.io/codeclimate/maintainability/raiondesu-experiments/pointless-fetch?style=flat-square" alt="code quality"></a></p>
-<p><a href="https://codepen.io/raiondesu/pen/qBBPPom" title="Link to in-browser playground"><img src="https://img.shields.io/badge/playground-link-blueviolet?style=flat-square" alt="code pen"></a>
 </p>
 
 <p align="center">
