@@ -1,11 +1,10 @@
-export function join(parts: string[], separator: string = '/') {
-  const replace = new RegExp(`${separator}{1,}`, 'g');
-
-  return parts
-    .filter(_ => typeof _ === 'string' && _.trim())
-    .join(separator)
-    .replace(replace, separator);
-}
+export const join = (parts: Array<string | undefined>) => parts
+  .filter(_ => _)
+  .join('/')
+  .replace(
+    /^(?:\w+:\/\/)?(.*\/+.+)/g,
+    (_, $1) => _.replace($1, $1.replace(/\/+/g, '/'))
+  );
 
 /**
  * Creates a sub-url factory
@@ -23,23 +22,24 @@ export function join(parts: string[], separator: string = '/') {
  *  (id: number) => 'https://my-blog.com/user/${id}/post'
  * ```
  */
-export const subUrl = function (this: string, base: string | ((...args: any[]) => string)) {
+export const subUrl = function (
+  this: { base?: string },
+  url: string | ((...args: any[]) => string)
+) {
   const applyBase = (
-    _base: (...args: any[]) => string
+    _url: (...args: any[]) => string
   ) => (...args: any[]) => {
-    const concat = () => join([this, _base(...args)]);
+    const concat = () => join([this.base, _url(...args)]);
 
-    const _subUrl = subUrl.bind(concat());
+    const _subUrl = subUrl.bind({ base: concat() });
     _subUrl.toString = concat;
 
     return _subUrl;
   };
 
-  if (typeof base === 'string') {
-    return applyBase(() => base)();
-  }
-
-  return applyBase(base);
+  return typeof url === 'string'
+    ? applyBase(() => url)()
+    : applyBase(url);
 } as string & {
   (base: string): typeof subUrl;
 
@@ -78,7 +78,7 @@ export function query(url: string, queryParams: object) {
     .filter(k => k && queryParams[k] !== undefined)
     .map((k): [string, string] => {
       if (Array.isArray(queryParams[k])) {
-        return [join(queryParams[k], ','), k];
+        return [queryParams[k].join(','), k];
       } else if (typeof queryParams[k] === 'object') {
         return [JSON.stringify(queryParams[k]), k];
       }

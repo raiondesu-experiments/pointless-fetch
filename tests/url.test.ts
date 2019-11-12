@@ -1,20 +1,12 @@
 import { join, query, subUrl } from '../src/url';
 
-describe('joinUrls', () => {
+describe('join', () => {
   it('joins correct urls', () => {
     const part1 = 'part1';
     const part2 = 'part2';
     const result = 'part1/part2';
 
     expect(join([part1, part2])).toBe(result);
-  });
-
-  it('joins with custom separator', () => {
-    const part1 = 'part1';
-    const part2 = 'part2';
-    const result = 'part1,part2';
-
-    expect(join([part1, part2], ',')).toBe(result);
   });
 
   it('joins slashed urls', () => {
@@ -33,8 +25,7 @@ describe('joinUrls', () => {
     expect(join([part1, part2])).toBe(result);
   });
 
-  // Doesn't work yet
-  it.skip('joins incorrect urls', () => {
+  it('joins incorrect urls', () => {
     const part1 = '//part1///part1//';
     const part2 = '/part2///part2';
     const result = '/part1/part1/part2/part2';
@@ -42,8 +33,7 @@ describe('joinUrls', () => {
     expect(join([part1, part2])).toBe(result);
   });
 
-  // Doesn't work yet
-  it.skip('joins base system urls', () => {
+  it('joins base system urls', () => {
     const part1 = 'http://domain1.com/part1/';
     const part2 = 'part2/part3';
     const result = 'http://domain1.com/part1/part2/part3';
