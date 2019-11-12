@@ -23,17 +23,7 @@ export function join(parts: string[], separator: string = '/') {
  *  (id: number) => 'https://my-blog.com/user/${id}/post'
  * ```
  */
-export const subUrl: {
-  <F extends (...args: any[]) => string>(
-    base: F
-  ): (
-    ...args: Parameters<F>
-  ) => typeof subUrl;
-
-  (base: string): typeof subUrl;
-
-  toString(): string;
-} = function (this: string, base: string | ((...args: any[]) => string)) {
+export const subUrl = function (this: string, base: string | ((...args: any[]) => string)) {
   const applyBase = (
     _base: (...args: any[]) => string
   ) => (...args: any[]) => {
@@ -50,6 +40,16 @@ export const subUrl: {
   }
 
   return applyBase(base);
+} as string & {
+  (base: string): typeof subUrl;
+
+  <F extends (...args: any[]) => string>(
+    base: F
+  ): (
+    ...args: Parameters<F>
+  ) => typeof subUrl;
+
+  toString(): string;
 };
 
 subUrl.toString = () => '';
