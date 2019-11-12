@@ -21,8 +21,57 @@ Functional point-free utilities for fetch
 
 ## Table of Contents<!-- omit in toc -->
 - [What is this?](#what-is-this)
+- [Installation](#installation)
+  - [Importing](#importing)
 
 ## What is this?
+
+It's a simple collection of functional utilities for [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) written in typesctipt.
+
+---
+
+## Installation
+
+**npm**:
+```bash
+npm i -S pointless-fetch
+```
+
+**browser**:
+```html
+<!-- ES2015 -->
+<script type="module">
+  import { subUrl, request, query } from 'https://unpkg.com/pointless-fetch';
+
+  // use it here
+</script>
+
+<!-- ES5 with IE11+ general syntax polyfills, global object - `pointless` -->
+<!-- Polyfill `window.Promise` and `Object.assign` yourself! -->
+<script src="https://unpkg.com/pointless-fetch/dist/umd.js"></script>
+```
+
+### Importing
+
+```ts
+// TS-module (pure typescript),
+// allows compilation settings to be set from the project config
+import { subUrl, request, query } from 'pointless-fetch/src';
+
+// ES-module (npm/node, typescript)
+import { subUrl, request, query } from 'pointless-fetch';
+
+// ESNext (no polyfills for esnext)
+import { subUrl, request, query } from 'pointless-fetch/dist/esnext';
+
+// ES-module (browser, node)
+import { subUrl, request, query } from 'https://unpkg.com/pointless-fetch';
+
+// Classic node commonjs
+const { subUrl, request, query } = require('pointless-fetch/dist/js');
+```
+
+
 
 ---
 
