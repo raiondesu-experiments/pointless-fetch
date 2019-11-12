@@ -1,2 +1,4 @@
 export * from './request';
-export * from './url/index';
+export * from './merge';
+export * from './query';
+export * from './suburl';
