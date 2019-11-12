@@ -4,5 +4,7 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./request"));
-__export(require("./url/index"));
+__export(require("./merge"));
+__export(require("./query"));
+__export(require("./suburl"));
 //# sourceMappingURL=index.js.map
