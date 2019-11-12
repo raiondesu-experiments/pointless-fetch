@@ -1,7 +1,11 @@
 import { isBase, joinUrls } from './util';
 
 export const defaultMerge = (v1: unknown, v2: unknown) => (
-  typeof v1 === typeof v2
+  typeof v2 === 'undefined'
+    ? v1
+  : typeof v1 === 'undefined'
+    ? v2
+  : typeof v1 === typeof v2
     ? Array.isArray(v1) && Array.isArray(v2)
         ? v1.concat(v2)
       : typeof v1 === 'object' && (!Array.isArray(v1) && !Array.isArray(v2))
