@@ -1,12 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.join = (parts) => parts
-    .filter(_ => _)
-    .join('/')
-    .replace(/^(?:\w+:\/\/)?(.*\/+.+)/g, (_, $1) => _.replace($1, $1.replace(/\/+/g, '/')));
+const util_1 = require("./util");
 exports.subUrl = function (url) {
     const applyBase = (_url) => (...args) => {
-        const concat = () => exports.join([this.base, _url(...args)]);
+        const concat = () => util_1.join(this.base, _url(...args));
         const _subUrl = exports.subUrl.bind({ base: concat() });
         _subUrl.toString = concat;
         return _subUrl;

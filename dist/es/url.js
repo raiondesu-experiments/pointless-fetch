@@ -1,10 +1,7 @@
-export const join = (parts) => parts
-    .filter(_ => _)
-    .join('/')
-    .replace(/^(?:\w+:\/\/)?(.*\/+.+)/g, (_, $1) => _.replace($1, $1.replace(/\/+/g, '/')));
+import { join } from "./util.js";
 export const subUrl = function (url) {
     const applyBase = (_url) => (...args) => {
-        const concat = () => join([this.base, _url(...args)]);
+        const concat = () => join(this.base, _url(...args));
         const _subUrl = subUrl.bind({ base: concat() });
         _subUrl.toString = concat;
         return _subUrl;

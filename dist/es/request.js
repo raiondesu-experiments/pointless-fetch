@@ -9,8 +9,10 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
+import { join, isBase } from "./util.js";
 export const request = (_a) => {
     var { url } = _a, init = __rest(_a, ["url"]);
     return new Request(url, init);
 };
+export const combine = (request, addon) => new Request(Object.assign(Object.assign({}, request), { url: isBase(addon.url) ? addon.url : join(request.url, addon.url) }), addon);
 //# sourceMappingURL=request.js.map
