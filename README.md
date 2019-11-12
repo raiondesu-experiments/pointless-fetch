@@ -6,6 +6,10 @@
 Functional point-free utilities for fetch
 </p>
 
+<h2 align="center">
+[WIP]
+</h2>
+
 <p align="center">
 <a href="https://travis-ci.com/raiondesu-experiments/pointless-fetch" title="Latest Travis CI build"><img src="https://img.shields.io/travis/com/raiondesu-experiments/pointless-fetch?style=flat-square" alt="travis"></a>
 <a href="https://www.npmjs.com/package/pointless-fetch" title="Downloads per month, but who cares?"><img src="https://img.shields.io/npm/dm/pointless-fetch.svg?style=flat-square" alt="npm"></a>
