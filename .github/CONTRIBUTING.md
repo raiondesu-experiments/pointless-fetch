@@ -1,10 +1,10 @@
-# Contributing to `{{package-name}}`
+# Contributing to `pointless-fetch`
 
 Please note - we have a [code of conduct](./CODE_OF_CONDUCT.md),
 please follow it in all your interactions with the project.
 
-1. [Start with an issue](https://github.com/{{owner}}/{{package-name}}/issues/new/choose).\
-   If there's a bug or a feature request, feel free to [create an issue](https://github.com/{{owner}}/{{package-name}}/issues/new/choose) first.
+1. [Start with an issue](https://github.com/raiondesu-experiments/pointless-fetch/issues/new/choose).\
+   If there's a bug or a feature request, feel free to [create an issue](https://github.com/raiondesu-experiments/pointless-fetch/issues/new/choose) first.
 
    This prevents submitting changes that are not thought through and, as a consequence, allows for a healthier and more productive way of coming with solutions to problems.
 

@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help improve {{package-name}}
+about: Create a report to help improve pointless-fetch
 title: ''
 labels: bug
 assignees: ''
@@ -32,5 +32,5 @@ If applicable, add screenshots to help explain your problem.
  - Platform:
    - [] Browser [e.g. chrome, safari] (**version**)
    - [] Node (**version**)
- - `{{package-name}}` version: **v0.10.0**
+ - `pointless-fetch` version: **v0.10.0**
 ---
