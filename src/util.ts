@@ -1,4 +1,4 @@
-export const join = (...parts: Array<string | undefined>) => parts
+export const joinUrls = (...urls: Array<string | undefined>) => urls
   .filter(_ => _)
   .join('/')
   .replace(
