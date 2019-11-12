@@ -12,7 +12,7 @@ export function query(url, queryParams) {
     })
         .map(([value, key]) => `${encodeURIComponent(key)}=${encodeURI(value)}`)
         .join('&');
-    const prefix = (url.indexOf('?') > -1 ? '&' : '?');
+    const prefix = (String(url).indexOf('?') > -1 ? '&' : '?');
     return url + (query.length > 0 ? prefix + query : '');
 }
 //# sourceMappingURL=query.js.map
