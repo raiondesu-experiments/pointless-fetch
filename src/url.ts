@@ -23,7 +23,7 @@ export const subUrl = function (
   const applyBase = (
     _url: (...args: any[]) => string
   ) => (...args: any[]) => {
-    const concat = () => join(this.base, _url(...args));
+    const concat = () => join(this ? this.base : undefined, _url(...args));
 
     const _subUrl = subUrl.bind({ base: concat() });
     _subUrl.toString = concat;
