@@ -56,7 +56,7 @@
     "type": "git",
     "url": "git+https://github.com/raiondesu-experiments/pointless-fetch.git"
   },
-  "author": "{{author}}",
+  "author": "Raiondesu <a.raiondesu@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/raiondesu-experiments/pointless-fetch/issues"
