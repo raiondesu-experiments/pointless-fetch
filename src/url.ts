@@ -1,10 +1,4 @@
-export const join = (parts: Array<string | undefined>) => parts
-  .filter(_ => _)
-  .join('/')
-  .replace(
-    /^(?:\w+:\/\/)?(.*\/+.+)/g,
-    (_, $1) => _.replace($1, $1.replace(/\/+/g, '/'))
-  );
+import { join } from './util';
 
 /**
  * Creates a sub-url factory
@@ -29,7 +23,7 @@ export const subUrl = function (
   const applyBase = (
     _url: (...args: any[]) => string
   ) => (...args: any[]) => {
-    const concat = () => join([this.base, _url(...args)]);
+    const concat = () => join(this.base, _url(...args));
 
     const _subUrl = subUrl.bind({ base: concat() });
     _subUrl.toString = concat;
