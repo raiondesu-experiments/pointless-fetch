@@ -1,24 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function join(parts, separator = '/') {
-    const replace = new RegExp(`${separator}{1,}`, 'g');
-    return parts
-        .filter(_ => typeof _ === 'string' && _.trim())
-        .join(separator)
-        .replace(replace, separator);
-}
-exports.join = join;
-exports.subUrl = function (base) {
-    const applyBase = (_base) => (...args) => {
-        const concat = () => join([this, _base(...args)]);
-        const _subUrl = exports.subUrl.bind(concat());
+exports.join = (parts) => parts
+    .filter(_ => _)
+    .join('/')
+    .replace(/^(?:\w+:\/\/)?(.*\/+.+)/g, (_, $1) => _.replace($1, $1.replace(/\/+/g, '/')));
+exports.subUrl = function (url) {
+    const applyBase = (_url) => (...args) => {
+        const concat = () => exports.join([this.base, _url(...args)]);
+        const _subUrl = exports.subUrl.bind({ base: concat() });
         _subUrl.toString = concat;
         return _subUrl;
     };
-    if (typeof base === 'string') {
-        return applyBase(() => base)();
-    }
-    return applyBase(base);
+    return typeof url === 'string'
+        ? applyBase(() => url)()
+        : applyBase(url);
 };
 exports.subUrl.toString = () => '';
 function query(url, queryParams) {
@@ -26,7 +21,7 @@ function query(url, queryParams) {
         .filter(k => k && queryParams[k] !== undefined)
         .map((k) => {
         if (Array.isArray(queryParams[k])) {
-            return [join(queryParams[k], ','), k];
+            return [queryParams[k].join(','), k];
         }
         else if (typeof queryParams[k] === 'object') {
             return [JSON.stringify(queryParams[k]), k];

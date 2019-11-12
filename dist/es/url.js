@@ -1,21 +1,17 @@
-export function join(parts, separator = '/') {
-    const replace = new RegExp(`${separator}{1,}`, 'g');
-    return parts
-        .filter(_ => typeof _ === 'string' && _.trim())
-        .join(separator)
-        .replace(replace, separator);
-}
-export const subUrl = function (base) {
-    const applyBase = (_base) => (...args) => {
-        const concat = () => join([this, _base(...args)]);
-        const _subUrl = subUrl.bind(concat());
+export const join = (parts) => parts
+    .filter(_ => _)
+    .join('/')
+    .replace(/^(?:\w+:\/\/)?(.*\/+.+)/g, (_, $1) => _.replace($1, $1.replace(/\/+/g, '/')));
+export const subUrl = function (url) {
+    const applyBase = (_url) => (...args) => {
+        const concat = () => join([this.base, _url(...args)]);
+        const _subUrl = subUrl.bind({ base: concat() });
         _subUrl.toString = concat;
         return _subUrl;
     };
-    if (typeof base === 'string') {
-        return applyBase(() => base)();
-    }
-    return applyBase(base);
+    return typeof url === 'string'
+        ? applyBase(() => url)()
+        : applyBase(url);
 };
 subUrl.toString = () => '';
 export function query(url, queryParams) {
@@ -23,7 +19,7 @@ export function query(url, queryParams) {
         .filter(k => k && queryParams[k] !== undefined)
         .map((k) => {
         if (Array.isArray(queryParams[k])) {
-            return [join(queryParams[k], ','), k];
+            return [queryParams[k].join(','), k];
         }
         else if (typeof queryParams[k] === 'object') {
             return [JSON.stringify(queryParams[k]), k];
