@@ -1,3 +1,5 @@
-import { combine } from "./request.js";
-export const createFetch = (request, after, error) => (finalRequest = { url: '' }) => fetch(combine(request, finalRequest)).then(after, error);
+import { combine, request } from "./request.js";
+export const createFetch = (req, after, error) => (finalRequest = { url: '' }) => fetch(request(combine(req, finalRequest)))
+    .then(after)
+    .catch(error);
 //# sourceMappingURL=fetch.js.map

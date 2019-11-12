@@ -16,7 +16,13 @@ exports.request = (_a) => {
     var { url } = _a, init = __rest(_a, ["url"]);
     return new Request(url, init);
 };
-exports.combine = (req1, req2) => exports.request(Object.keys(req1).concat(Object.keys(req2))
+exports.jsonBody = (_a) => {
+    var { body } = _a, stuff = __rest(_a, ["body"]);
+    return (Object.assign(Object.assign({}, stuff), { body: typeof body !== 'string' && typeof body !== 'undefined'
+            ? JSON.stringify(body)
+            : body }));
+};
+exports.combine = (req1, req2) => (Object.keys(req1).concat(Object.keys(req2))
     .reduce((res, key) => (res[key] = (exports.combine[key] || merge_1.defaultMerge)(req1[key], req2[key]),
     res), {}));
 exports.combine.headers = merge_1.mergeHeaders;
