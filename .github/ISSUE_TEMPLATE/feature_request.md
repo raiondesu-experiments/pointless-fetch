@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest your own idea for {{package-name}}
+about: Suggest your own idea for pointless-fetch
 title: ''
 labels: enhancement
 assignees: ''
