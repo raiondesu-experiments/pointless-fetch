@@ -55,7 +55,7 @@ export const subUrl = function (this: string, base: string | ((...args: any[]) =
 subUrl.toString = () => '';
 
 /**
- * Encode an object into the plain URL as url-query-string
+ * Encodes an object into the plain URL as url-query-string
  *
  * ```js
  *  query('/list', {
