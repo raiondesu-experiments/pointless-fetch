@@ -1,6 +1,6 @@
 {
   "name": "pointless-fetch",
-  "version": "0.0.1-rc.6",
+  "version": "0.0.1",
   "sideEffects": false,
   "description": "Functional point-free utilities for fetch",
   "main": "dist/js",
