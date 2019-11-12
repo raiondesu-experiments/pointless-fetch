@@ -19,7 +19,7 @@ Functional point-free utilities for fetch
 </p>
 
 <p align="center">
-<a href="https://codepen.io/raiondesu/pen/qBBPPom" title="Link to in-browser playground"><img src="https://img.shields.io/badge/playground-link-blueviolet?style=flat-square" alt="code pen"></a>
+<a href="https://codepen.io/raiondesu/pen/GRRXZBz" title="Link to in-browser playground"><img src="https://img.shields.io/badge/playground-link-blueviolet?style=flat-square" alt="code pen"></a>
 </p>
 
 ## Table of Contents<!-- omit in toc -->
