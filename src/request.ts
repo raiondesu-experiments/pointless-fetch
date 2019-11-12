@@ -5,6 +5,13 @@ export type TRequest =
 
 export const request = ({ url, ...init }: TRequest) => new Request(url, init);
 
+export const jsonBody = ({ body, ...stuff }: TRequest) => ({
+  ...stuff,
+  body: typeof body !== 'string' && typeof body !== 'undefined'
+    ? JSON.stringify(body)
+    : body,
+});
+
 export type TCombiner = {
   (r: TRequest, addon: TRequest): TRequest;
 } & {
