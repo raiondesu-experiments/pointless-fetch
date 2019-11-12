@@ -1,9 +1,9 @@
-import { TRequest, combine } from './request';
+import { TRequest, combine, request } from './request';
 
 export const createFetch = <T, E = void>(
-  request: TRequest,
+  req: TRequest,
   after: (res: Response) => T,
   error: (e: any) => E
 ) => (
   finalRequest: TRequest = { url: '' }
-) => fetch(combine(request, finalRequest)).then(after, error);
+) => fetch(request(combine(req, finalRequest))).then(after, error);
