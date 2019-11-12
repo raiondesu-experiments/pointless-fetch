@@ -41,6 +41,15 @@ describe('joinUrls', () => {
 
     expect(join([part1, part2])).toBe(result);
   });
+
+  // Doesn't work yet
+  it.skip('joins base system urls', () => {
+    const part1 = 'http://domain1.com/part1/';
+    const part2 = 'part2/part3';
+    const result = 'http://domain1.com/part1/part2/part3';
+
+    expect(join([part1, part2])).toBe(result);
+  });
 });
 
 describe('subUrl', () => {

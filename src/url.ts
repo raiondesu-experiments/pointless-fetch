@@ -1,10 +1,10 @@
 export function join(parts: string[], separator: string = '/') {
-  const replace = new RegExp(`(.+)(?!:${separator})${separator}{1,}`, 'g');
+  const replace = new RegExp(`${separator}{1,}`, 'g');
 
   return parts
     .filter(_ => typeof _ === 'string' && _.trim())
     .join(separator)
-    .replace(replace, (_, $1) => $1 + separator);
+    .replace(replace, separator);
 }
 
 /**
