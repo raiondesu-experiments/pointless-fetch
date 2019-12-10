@@ -57,14 +57,16 @@ export const suburl = <TSubUrlFactory> function suburlFactory(
 
   // If context is present, but trying to set a new base
   // - reset the context
-  return isBase(url)
-    ? suburl(url)
-    : bindSuburl(url ? {
-        base: this?.base ?? url,
-        url: this?.base
-          ? joinUrls(this.url, url)
-          : '',
-      } : this);
+  if (this?.base && isBase(url)) {
+    return suburl(url);
+  }
+
+  return bindSuburl(url ? {
+    base: this?.base ?? url,
+    url: this?.base
+      ? joinUrls(this.url, url)
+      : '',
+  } : this);
 };
 
 suburl.toString = () => '';
