@@ -6,4 +6,4 @@ export const joinUrls = (...urls: Array<string | undefined>) => urls
     (_, $1) => _.replace($1, $1.replace(/\/+/g, '/'))
   );
 
-export const isBase = (url: string) => /^(\w+:\/\/.+|\/\/)/.test(url);
+export const isBase = (url?: string) => url ? /^(\w+:\/\/.+|\/\/)/.test(url) : false;
