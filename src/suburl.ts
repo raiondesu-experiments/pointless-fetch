@@ -44,7 +44,7 @@ export type TSubUrlFactory = string & {
  *  result: (userId: number, postId: number) => 'https://my-blog.com/user/${userId}/post/${postId}'
  * ```
  */
-export const suburl = <TSubUrlFactory> function suburlFactory(
+export const suburl = <TSubUrlFactory> function (
   this: TSubUrlContext,
   url?: string | ((...args: any[]) => string)
 ) {
