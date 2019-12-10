@@ -23,28 +23,25 @@ export type TSubUrlFactory = string & {
  *
  * ```ts
  *  const myBlog = subUrl('https://my-blog.com');
- *  // result:
- *  'https://my-blog.com'
+ *  result: 'https://my-blog.com'
  *
  *  const user = myBlog('user');
- *  // result:
- *  'https://my-blog.com/user'
+ *  result: 'https://my-blog.com/user'
+ *
+ *  user('https://google.com')
+ *  result: 'https://google.com/user'
  *
  *  user.call({ base: 'https://google.com' })
- *  // result:
- *  'https://google.com/user'
+ *  result: 'https://google.com/user'
  *
  *  user.call({ base: 'https://google.com', url: 'blog' })
- *  // result:
- *  'https://google.com/user/blog'
+ *  result: 'https://google.com/user/blog'
  *
  *  user.call({ base: 'https://google.com', url: 'blog' }, 'post')
- *  // result:
- *  'https://google.com/user/blog/post'
+ *  result: 'https://google.com/user/blog/post'
  *
  *  const userPost = user((userId: number, postId: number) => `${userId}/post/${postId}`);
- *  // result:
- *  (userId: number, postId: number) => 'https://my-blog.com/user/${userId}/post/${postId}'
+ *  result: (userId: number, postId: number) => 'https://my-blog.com/user/${userId}/post/${postId}'
  * ```
  */
 export const suburl = <TSubUrlFactory> function suburlFactory(
@@ -58,7 +55,7 @@ export const suburl = <TSubUrlFactory> function suburlFactory(
   // If context is present, but trying to set a new base
   // - reset the context
   if (this?.base && isBase(url)) {
-    return suburl(url);
+    return suburl(joinUrls(url, this.url));
   }
 
   const context: TSubUrlContext = url ? {
