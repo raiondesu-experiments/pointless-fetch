@@ -61,17 +61,13 @@ export const suburl = <TSubUrlFactory> function suburlFactory(
     return suburl(url);
   }
 
-  return bindSuburl(url ? {
+  const context: TSubUrlContext = url ? {
     base: this?.base ?? url,
     url: this?.base
       ? joinUrls(this.url, url)
       : '',
-  } : this);
-};
+  } : this;
 
-suburl.toString = () => '';
-
-function bindSuburl(context: TSubUrlContext) {
   const _subUrl = function (
     this: TSubUrlContext,
     ...args: Parameters<TSubUrlFactory>
@@ -85,4 +81,6 @@ function bindSuburl(context: TSubUrlContext) {
   _subUrl.toString = () => context ? joinUrls(context.base, context.url) : '';
 
   return _subUrl;
-}
+};
+
+suburl.toString = () => '';
