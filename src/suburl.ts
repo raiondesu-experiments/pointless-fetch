@@ -1,6 +1,6 @@
 import { joinUrls, isBase } from './util';
 
-export type TSubUrlContext = { base: string; url?: string } | null | undefined;
+export type TSubUrlContext = { base?: string; url?: string } | null | undefined;
 
 export type TSubUrlFactory = string & {
   <F extends (...args: any[]) => string>(
@@ -8,11 +8,9 @@ export type TSubUrlFactory = string & {
     base: F
   ): (...args: Parameters<F>) => TSubUrlFactory;
 
-  (this: TSubUrlContext | void): TSubUrlFactory;
-
   (
     this: TSubUrlContext | void,
-    base: string
+    base?: string
   ): TSubUrlFactory;
 
   toString(): string;
@@ -49,35 +47,40 @@ export type TSubUrlFactory = string & {
  *  (userId: number, postId: number) => 'https://my-blog.com/user/${userId}/post/${postId}'
  * ```
  */
-export const suburl = <TSubUrlFactory> function (
+export const suburl = <TSubUrlFactory> function suburlFactory(
   this: TSubUrlContext,
   url?: string | ((...args: any[]) => string)
 ) {
-  if (!url) {
-    return suburl;
-  }
-
   if (typeof url === 'function') {
     return (...args: any[]) => suburl.call(this, url(...args));
   }
 
   // If context is present, but trying to set a new base
   // - reset the context
-  if (this?.base && isBase(url)) {
-    return suburl.call(void 0, url);
-  }
-
-  const context: TSubUrlContext = {
-    base: this?.base ?? url,
-    url: this?.base
-      ? joinUrls(this.url, url)
-      : '',
-  };
-
-  const _subUrl = suburl.bind(context);
-  _subUrl.toString = () => joinUrls(context.base, context.url);
-
-  return _subUrl;
+  return isBase(url)
+    ? suburl(url)
+    : bindSuburl(url ? {
+        base: this?.base ?? url,
+        url: this?.base
+          ? joinUrls(this.url, url)
+          : '',
+      } : this);
 };
 
 suburl.toString = () => '';
+
+function bindSuburl(context: TSubUrlContext) {
+  const _subUrl = function (
+    this: TSubUrlContext,
+    ...args: Parameters<TSubUrlFactory>
+  ) {
+    return suburl.apply({
+      ...context,
+      ...this,
+    }, args);
+  };
+
+  _subUrl.toString = () => context ? joinUrls(context.base, context.url) : '';
+
+  return _subUrl;
+}
