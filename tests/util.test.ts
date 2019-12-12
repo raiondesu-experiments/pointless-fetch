@@ -1,4 +1,4 @@
-import { join, isBase } from '../src/util';
+import { joinUrls, isBase } from '../src/util';
 
 describe('isBase', () => {
   it('gives correct results', () => {
@@ -18,7 +18,7 @@ describe('join', () => {
     const part2 = 'part2';
     const result = 'part1/part2';
 
-    expect(join(part1, part2)).toBe(result);
+    expect(joinUrls(part1, part2)).toBe(result);
   });
 
   it('joins slashed urls', () => {
@@ -26,7 +26,7 @@ describe('join', () => {
     const part2 = '/part2/';
     const result = 'part1/part2/';
 
-    expect(join(part1, part2)).toBe(result);
+    expect(joinUrls(part1, part2)).toBe(result);
   });
 
   it('joins joined urls', () => {
@@ -34,7 +34,7 @@ describe('join', () => {
     const part2 = 'part2/part2';
     const result = 'part1/part1/part2/part2';
 
-    expect(join(part1, part2)).toBe(result);
+    expect(joinUrls(part1, part2)).toBe(result);
   });
 
   it('joins incorrect urls', () => {
@@ -42,7 +42,7 @@ describe('join', () => {
     const part2 = '/part2///part2';
     const result = '/part1/part1/part2/part2';
 
-    expect(join(part1, part2)).toBe(result);
+    expect(joinUrls(part1, part2)).toBe(result);
   });
 
   it('joins base system urls', () => {
@@ -50,6 +50,6 @@ describe('join', () => {
     const part2 = 'part2/part3';
     const result = 'http://domain1.com/part1/part2/part3';
 
-    expect(join(part1, part2)).toBe(result);
+    expect(joinUrls(part1, part2)).toBe(result);
   });
 });

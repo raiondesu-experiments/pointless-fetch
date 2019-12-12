@@ -11,10 +11,20 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const util_1 = require("./util");
+const merge_1 = require("./merge");
 exports.request = (_a) => {
     var { url } = _a, init = __rest(_a, ["url"]);
     return new Request(url, init);
 };
-exports.combine = (request, addon) => new Request(Object.assign(Object.assign({}, request), { url: util_1.isBase(addon.url) ? addon.url : util_1.join(request.url, addon.url) }), addon);
+exports.jsonBody = (_a) => {
+    var { body } = _a, stuff = __rest(_a, ["body"]);
+    return (Object.assign(Object.assign({}, stuff), { body: typeof body !== 'string' && typeof body !== 'undefined'
+            ? JSON.stringify(body)
+            : body }));
+};
+exports.combine = (req1, req2) => (Object.keys(req1).concat(Object.keys(req2))
+    .reduce((res, key) => (res[key] = (exports.combine[key] || merge_1.defaultMerge)(req1[key], req2[key]),
+    res), {}));
+exports.combine.headers = merge_1.mergeHeaders;
+exports.combine.url = merge_1.mergeUrls;
 //# sourceMappingURL=request.js.map

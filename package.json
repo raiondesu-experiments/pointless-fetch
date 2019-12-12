@@ -1,6 +1,6 @@
 {
   "name": "pointless-fetch",
-  "version": "0.0.2",
+  "version": "0.1.0-rc.3",
   "sideEffects": false,
   "description": "Functional point-free utilities for fetch",
   "main": "dist/js",
@@ -35,9 +35,9 @@
   },
   "scripts": {
     "test": "jest -i",
-    "build:js": "ttsc --outDir dist/js -t ES2015",
-    "build:es": "ttsc --outDir dist/es -t ES2015 --module esnext",
-    "build:next": "ttsc --outDir dist/esnext --module esnext",
+    "build:js": "ttsc --outDir dist/js -t es2015",
+    "build:es": "ttsc --outDir dist/es -t es2015 --module esnext",
+    "build:next": "ttsc --outDir dist/esnext -t esnext --module esnext",
     "build:umd": "bili",
     "build": "npm run checks && npm run build:js && npm run build:es && npm run build:next && npm run build:umd",
     "dev": "tsc --noEmit -w",
@@ -56,7 +56,7 @@
     "type": "git",
     "url": "git+https://github.com/raiondesu-experiments/pointless-fetch.git"
   },
-  "author": "{{author}}",
+  "author": "Raiondesu <a.raiondesu@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/raiondesu-experiments/pointless-fetch/issues"

@@ -1,4 +1,4 @@
-export const join = (...parts: Array<string | undefined>) => parts
+export const joinUrls = (...urls: Array<string | undefined>) => urls
   .filter(_ => _)
   .join('/')
   .replace(
@@ -6,4 +6,4 @@ export const join = (...parts: Array<string | undefined>) => parts
     (_, $1) => _.replace($1, $1.replace(/\/+/g, '/'))
   );
 
-export const isBase = (url: string) => /^(\w+:\/\/.+|\/\/)/.test(url);
+export const isBase = (url?: string) => url ? /^(\w+:\/\/.+|\/\/)/.test(url) : false;
